@@ -55,7 +55,6 @@ module EmployeeHelper
     def self.update_employee_status(user_id,emp_id,status)
         begin
             m = {}
-            binding.pry
             if self.is_authorised_to_action(user_id)
                 emp = EmplyoeeDetail.find(emp_id)
                 emp.status = status

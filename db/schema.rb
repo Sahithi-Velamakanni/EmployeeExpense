@@ -13,27 +13,28 @@
 ActiveRecord::Schema.define(version: 2020_09_10_090104) do
 
   create_table "bill_details", force: :cascade do |t|
-    t.integer "emp_id"
     t.integer "invoice_no"
     t.datetime "date_of_expense"
     t.string "description"
     t.float "amount"
+    t.integer "emplyoee_detail_id"
+    t.binary "related_pdfs"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["emplyoee_detail_id"], name: "index_bill_details_on_emplyoee_detail_id"
   end
 
   create_table "employee_details", force: :cascade do |t|
-    t.string "emp_name"
-    t.string "emp_department"
+    t.string "name"
+    t.string "department"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "emplyoee_details", force: :cascade do |t|
-    t.integer "emp_id"
     t.string "department"
-    t.string "emp_name"
+    t.string "name"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

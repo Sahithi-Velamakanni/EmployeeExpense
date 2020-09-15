@@ -1,0 +1,1 @@
+STATUS_CODES=['U','SA','SR','AA','AR']
