@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Dear <%= @employee.name%> ,</h1>
+    <p>
+    # <%=unless @comment.blank?%>
+    #   <p> A Comment has been added on your expense </p> <br>
+    #   <p><q><%=@comment.comment></q></p><br>
+    # </p>
+    # <%= else%>
+    <p>
+      Status of your application has been changed to  for the following bills and expenses
+      <%= total_bill_amount =0, total_bill_approved=0
+      <%=if @is_Expense %>
+        <%= @expense.bills.each do |bills|%>
+            <p> bill id         : <%=bill.id%>></p><br>
+            <p> invoice number  : <%=bill.id%>></p><br>
+            <p> date of expense : <%=bill.id%>></p><br>
+            <p> description     : <%=bill.id%>></p><br>
+            <p> amount          : <%=bill.id%>></p>
+            <p> status          : <%=STATUS_CODES[bill.status]%>></p>
+            <%= total_bill_approved += bill.amount if bill.status =='AA' %>
+            <%= total_bill_amount +=bill.amount %>
+
+       <%= end %>
+
+       <p> Total Bill Made by you : <%=total_bill_amount%> </p>
+       <p> Total Bill Approved    : <%=total_bill_approved%> </p>
+
+      
+    </p>
+    <p>Have a greate day!</p>
+  </body>
+</html>

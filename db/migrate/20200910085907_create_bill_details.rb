@@ -6,10 +6,14 @@ class CreateBillDetails < ActiveRecord::Migration[5.2]
       t.datetime :date_of_expense
       t.string :description
       t.float :amount
-      t.references :emplyoee_detail
+      t.references :expenses
       t.binary :related_pdfs
       t.timestamps
     end
-    change_column_default :bill_details, :status, STATUS_CODES[0]
+    change_column_default :bill_details, :status, nil
+    # :from STATUS_CODES[0], :to STATUS_CODES[1]
   end
+  # def up 
+  #   remove_column :bill_detail, :emplyoee_detail_id
+  # end
 end

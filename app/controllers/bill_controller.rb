@@ -4,16 +4,20 @@ class BillController < ApplicationController
     #   render :json => m
     # end
     def new_bill
-      bills=BillDetail.create(bill_params)
-      if 
+      # binding.pry
+      bills=BillDetail.create(bill_params[:bill_details])
+      if !bills.blank?
        render json: bills, adapter: :json, status: 201
       else
-        render json: {error: billa.error}, status: 401
+        render json: {error: bill_detail.error}, status: 401
       end
     end  
     private
     def bill_params
-      params.require('bills').permit('bills','user_id')
+      # params.require(:bill_details).each do |bill_detail|
+      #   bill_detail.permit(:emplyoee_detail_id,:invoice_no,:date,:description,:amount)
+      # end
+      params.permit(bill_details: [:emplyoee_detail_id,:invoice_no,:date,:description,:amount])
     end
     
 end

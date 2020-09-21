@@ -1,0 +1,13 @@
+current directory: /Users/sahithi.v/Documents/projects/employee_expense/vendor/bundle/ruby/2.6.0/gems/json-2.3.1/ext/json
+/Users/sahithi.v/.rubies/ruby-2.6.6/bin/ruby -I /Users/sahithi.v/.rubies/ruby-2.6.6/lib/ruby/site_ruby/2.6.0 -r ./siteconf20200921-43880-bcy89h.rb extconf.rb
+creating Makefile
+
+current directory: /Users/sahithi.v/Documents/projects/employee_expense/vendor/bundle/ruby/2.6.0/gems/json-2.3.1/ext/json
+make "DESTDIR=" clean
+
+current directory: /Users/sahithi.v/Documents/projects/employee_expense/vendor/bundle/ruby/2.6.0/gems/json-2.3.1/ext/json
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+current directory: /Users/sahithi.v/Documents/projects/employee_expense/vendor/bundle/ruby/2.6.0/gems/json-2.3.1/ext/json
+make "DESTDIR=" install

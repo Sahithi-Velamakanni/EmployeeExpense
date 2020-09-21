@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_10_090104) do
+ActiveRecord::Schema.define(version: 2020_09_17_083921) do
 
   create_table "bill_details", force: :cascade do |t|
     t.integer "invoice_no"
@@ -21,7 +21,19 @@ ActiveRecord::Schema.define(version: 2020_09_10_090104) do
     t.binary "related_pdfs"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "expense_id"
     t.index ["emplyoee_detail_id"], name: "index_bill_details_on_emplyoee_detail_id"
+    t.index ["expense_id"], name: "index_bill_details_on_expense_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "comment"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "commentable_id"
+    t.string "commentable_type"
+    t.index ["commentable_id"], name: "index_comments_on_commentable_id"
   end
 
   create_table "employee_details", force: :cascade do |t|
@@ -38,6 +50,14 @@ ActiveRecord::Schema.define(version: 2020_09_10_090104) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email_id"
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.integer "emplyoee_detail_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["emplyoee_detail_id"], name: "index_expenses_on_emplyoee_detail_id"
   end
 
 end
