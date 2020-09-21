@@ -1,3 +1,5 @@
+require('net/http')
+require('json')
 module ExpenseHelper
     def self.search(params)
         bill_details=[]
@@ -10,32 +12,37 @@ module ExpenseHelper
     def self.do_system_validation(bill_details)
         invoices=[]
         bill_details.each do |bill_detail|
-            invoices << {bill_detail.id=>bill_detail.invoice_number}
+            invoices << {bill_detail.id=>bill_detail.invoice_no}
         end
         response = make_a_external_call_for_invoice_validation(invoices)
         update_bill_status(response)
     end
-    def make_a_external_call_for_invoice_validation(invoices)
-        begin
+    def self.make_a_external_call_for_invoice_validation(invoices)
+        # begin
             response_status=[]
             invoices.each do |invoice|
                 uri = URI.parse('https://my.api.mockaroo.com/invoices.json')
                 con=Net::HTTP.new(uri.host, uri.port)
-                req= Net::HTTP.Post.new(uri.request_uri,{'API-Key': 'b490bb80'})
-                req.body = {"invoice_id" =>invoice[1]}
-                response = con.request(req)
-                response_status << { invoice[0]=>response.to_json['status']}
+                con.use_ssl = true
+                con.verify_mode = OpenSSL::SSL::VERIFY_NONE
+                req= Net::HTTP::Post.new(uri.request_uri)
+                req.add_field 'X-API-Key', 'b490bb80'
+                req.body = {"invoice_id" =>invoice.values[0]}.to_json
+                res = con.request(req)
+                response = JSON.parse(res.body)
+                response_status << { invoice.keys[0]=>response['status']}
             end
             return response_status
-        rescue
-            nil 
-        end
-        []
+        # rescue
+            # nil 
+        # end
+        # []
     end
-    def update_bill_status(response)
-        response.each do |bill|
-            b = BillDetail.find(bill[0])
-            b.status=(bill[1]==true) ? "SA":"SR" 
+    def self.update_bill_status(response)
+        binding.pry
+        response.each do |response|
+            b = BillDetail.find(response.keys[0])
+            b.status=(response.values[0]==true) ? "SA":"SR" 
             b.save!
         end
     end

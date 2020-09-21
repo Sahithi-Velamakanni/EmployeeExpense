@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_17_083921) do
+ActiveRecord::Schema.define(version: 2020_09_21_155646) do
 
   create_table "bill_details", force: :cascade do |t|
     t.integer "invoice_no"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2020_09_17_083921) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "expense_id"
+    t.string "status"
     t.index ["emplyoee_detail_id"], name: "index_bill_details_on_emplyoee_detail_id"
     t.index ["expense_id"], name: "index_bill_details_on_expense_id"
   end

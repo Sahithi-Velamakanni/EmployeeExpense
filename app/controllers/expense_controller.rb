@@ -1,9 +1,10 @@
 class ExpenseController < ApplicationController
     def new_expense
         expense=Expense.create(:emplyoee_detail_id =>params['emplyoee_detail_id'])
-        bill=expense.bill_details.create(bill_params[:bill_details])
-        unless bill.blank?
-         render json: bill, adapter: :json, status: 201
+        bills=expense.bill_details.create(bill_params[:bill_details])
+        ExpenseHelper.do_system_validation(bills)
+        unless bills.blank?
+         render json: bills, adapter: :json, status: 201
         else
           render json: {error: bill_detail.error}, status: 401
         end
@@ -13,7 +14,7 @@ class ExpenseController < ApplicationController
     end
     def search
         bill_details  = ExpenseHelper.search(params)
-        ExpenseHelper.do_system_validation(bill_details)
+        
         if !bill_details.blank?
           render json: bill_details, adapter: :json, status: 200
         else
