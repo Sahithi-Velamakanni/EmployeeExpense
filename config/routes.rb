@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   post '/expense/new_expense'
   get '/admin/search/:id', to: 'expense#search'
   post '/comments/new', to: 'comments#new'
+  post '/expense/admin_expense_action'
 
 end

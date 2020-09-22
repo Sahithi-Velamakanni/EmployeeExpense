@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
         else
             @comments = Expense.where (id_params).first.comments.create(comment_params)
         end
+        CommentMailer.with(comments: @comments).comment_mail('xys').deliver
     end
 
     def comment_params

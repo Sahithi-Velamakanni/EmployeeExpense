@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Dear <%=params[:user_name]%>,</p>
+
+    <p>
+      Your bill/expense has received the following comment
+
+       <q> <%= params[:comments].comment%></q>
+    </p><br>
+    <p>Thank you, have a greate day!</p>
+  </body>
+</html>
